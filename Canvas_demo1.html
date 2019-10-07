@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <!-- 1.1画布是白色的，而且默认大小300*150 -->
+    <!-- 1.2设置画布的大小，不建议在canvas的样式里面设置尺寸 -->
+    <!-- 我们在css样式里面设置的是canvas元素的样式，不是canvas的画布大小 -->
+    <canvas width="600" height="400"></canvas>
+    <!-- 2.准备绘制工具 -->
+
+    <!-- 3.利用工具绘图 -->
+    <script>
+        // 1.获取元素
+        var myCanvas = document.querySelector('canvas');
+        // 2.获取上下文 绘制工具箱,在这个工具箱里面有很多绘制工具
+        // 获取canvas有关的环境
+        // 暂时没有3d效果 web gl 绘制3D效果的网页技术,一般用于游戏开发
+        var ctx = myCanvas.getContext('2d');
+        // 3.移动画笔
+        ctx.moveTo(100, 100);
+        // 4.绘制一条直线(轨迹，绘制路径) 在canvas上面画的是轨迹,你要描边
+        ctx.lineTo(200, 100);
+        // 5.描边
+        ctx.stroke()
+    </script>
+</body>
+
+</html>
