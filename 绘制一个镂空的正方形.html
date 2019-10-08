@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>镂空正方形</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        // 绘制镂空的正方形
+        // 1.绘制两个正方形 一大一小端套
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 100)
+        ctx.lineTo(300, 300)
+        ctx.lineTo(100, 300)
+        ctx.closePath()
+
+
+        ctx.moveTo(150, 150)
+        ctx.lineTo(150, 250)
+        ctx.lineTo(250, 250)
+        ctx.lineTo(250, 150)
+        ctx.closePath()
+
+        // ctx.stroke()
+        ctx.fillStyle = 'red'
+        ctx.fill();
+        // 填充  非零环绕规则 在里面画一条直线，如果是顺时针与我相交，+1，如果是逆时针与我相交，-1，如果非0就填充
+
+        // 看一块区域是否填充，从这个区域拉一条直线，看和这条直线相交的轨迹，如果是顺时针的轨迹与直线相交，+1，如果是逆时针的轨迹与直线相交，-1，所有的轨迹的值计算出来，如果总值是非0就填充，如果是0那么则不填充
+    </script>
+</body>
+
+</html>
