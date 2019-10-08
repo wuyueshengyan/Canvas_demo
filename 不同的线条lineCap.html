@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三条</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d');
+
+        // 画平行线
+        ctx.beginPath();
+        // 蓝色10px
+        ctx.moveTo(100, 100.5);
+        ctx.lineTo(200, 50)
+        ctx.lineTo(300, 100.5);
+
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'blue';
+        ctx.lineCap = 'butt' //没有任何效果，默认
+        ctx.lineJoin = 'miter' //没有任何效果，默认
+            // 描边
+        ctx.stroke();
+
+        // 红色20px
+        ctx.beginPath();
+        ctx.moveTo(100, 200.5);
+        ctx.lineTo(200, 250)
+        ctx.lineTo(300, 200.5);
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = 'red';
+        ctx.lineJoin = 'round'
+        ctx.lineCap = 'round'
+            // 描边
+        ctx.stroke();
+
+        // 黄色30px
+        ctx.beginPath(); //开启新路径
+        ctx.moveTo(100, 300.5);
+        ctx.lineTo(200, 380)
+        ctx.lineTo(300, 300.5);
+        ctx.lineWidth = 30;
+        ctx.strokeStyle = 'green';
+        ctx.lineJoin = 'bevel' //斜面，会把尖角销掉
+        ctx.lineCap = 'square'
+            // 描边
+        ctx.stroke();
+
+
+
+
+
+        // 关于线条问题
+        // 默认的宽度是  1px
+        // 默认的颜色是  黑色
+
+        // 产生的原因
+        // 画线的时候， 对齐的点是线的中心位置， 线条的中心就是对准在那个刻度上， 导致你有0 .5 px在上一个px里面， 还有0.5px在下一个px里面，在浏览器中0.5px的东西会默认当做1px来显示，所以1px的线条会当做2px来显示，显示的颜色是不饱和的,所以线条的宽度和颜色显示不正确
+
+        // 解决方案
+        // 往上移动0.5px就行了
+    </script>
+</body>
+
+</html>
