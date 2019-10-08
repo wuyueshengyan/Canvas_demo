@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三角形</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        /*1.绘制一个三角型*/
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 100)
+        ctx.lineTo(200, 300)
+
+        // 起始点和lineTo的结束点无法完全闭合
+        ctx.lineTo(100, 100);
+
+        // 使用canvas的自动闭合,自动闭合我们的路径
+        ctx.closePath();
+
+
+        // 2.描边
+        ctx.lineWidth = 10
+        ctx.stroke();
+
+        // 在canvas中，有两种处理轨迹的方式，一种是描边，一种是填充
+
+        // 3.填充
+        // ctx.fill();
+    </script>
+</body>
+
+</html>
