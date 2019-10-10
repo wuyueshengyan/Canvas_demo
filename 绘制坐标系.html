@@ -45,7 +45,7 @@
         ctx.lineTo(canvasWidth - space, y0)
         ctx.stroke()
 
-        // 画箭头
+        // 画箭头,不能直接闭合，否则就回到原点了
         ctx.lineTo(canvasWidth - space - arrowSize, y0 + arrowSize / 2)
         ctx.lineTo(canvasWidth - space - arrowSize, y0 - arrowSize / 2)
         ctx.lineTo(canvasWidth - space, y0)
