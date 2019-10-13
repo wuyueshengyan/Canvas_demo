@@ -14,13 +14,12 @@
 </head>
 
 <body>
-    <!-- 1.准备画布 -->
+    <!-- 准备画布 -->
     <canvas width="600" height="400"></canvas>
 
     <script>
         // var myCanvas = document.querySelector('canvas');
         // var ctx = myCanvas.getContext('2d')
-
         // 1.构造函数，构造函数首字母要大写
         var LineChart = function(ctx) {
             // 获取绘图工具
@@ -45,7 +44,6 @@
 
         };
         // 2.行为方法
-
         // 初始化行为
         LineChart.prototype.init = function() {
             this.drawGrid();
@@ -171,7 +169,6 @@
             x: 500,
             y: 10
         }]
-
         var linechart = new LineChart();
         // 在构造函数初始化的时候传入值
         linechart.init(data);
