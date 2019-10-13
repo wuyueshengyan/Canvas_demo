@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d');
+
+        // fillStyle 既可以用颜色来填充 也可以使用一个渐变的方案来填充矩形
+        // 创建一个渐变的方案
+        // 渐变是有长度的
+
+        var linearGradient = ctx.createLinearGradient(100, 100, 500, 100);
+        linearGradient.addColorStop(0, 'pink');
+        linearGradient.addColorStop(0.5, 'red');
+        linearGradient.addColorStop(1, 'blue');
+
+        // 直接使用渐变方案
+        ctx.fillStyle = linearGradient;
+        ctx.fillRect(100, 100, 400, 100);
+
+        // pink -- blue
+
+        // 回想线性渐变--->要求 方向 、可以用角度表示方向、 起始颜色 结束颜色
+
+        // canvas的渐变方向是通过两个点的坐标控制
+    </script>
+</body>
+
+</html>
