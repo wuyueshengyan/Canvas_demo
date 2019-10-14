@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        // 绘制圆弧
+        // 绘制圆弧的要素 1.确定圆心 坐标 2.确定圆的半径 r 3.确定起始绘制的位置和结束绘制的位置 确定圆弧的长度和位置  startAngle endAngle 弧度 
+        // 取得绘制的方向 direction 默认是顺时针 顺时针是false  逆时针是true
+        // 在中心位置画一个半径150px的圆弧右下角
+
+        var w = ctx.canvas.width;
+        var h = ctx.canvas.height;
+        // 把起点放在圆心位置
+
+        ctx.moveTo(w / 2, h / 2)
+        ctx.arc(w / 2, h / 2, 150, 0, -Math.PI / 2, true);
+        ctx.closePath()
+        ctx.stroke()
+
+        // ctx.fill()
+    </script>
+</body>
+
+</html>
