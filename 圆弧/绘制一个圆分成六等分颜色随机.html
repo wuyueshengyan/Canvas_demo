@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        // 绘制圆弧
+        // 绘制圆弧的要素 1.确定圆心 坐标 2.确定圆的半径 r 3.确定起始绘制的位置和结束绘制的位置 确定圆弧的长度和位置  startAngle endAngle 弧度 
+        // 取得绘制的方向 direction 默认是顺时针 顺时针是false  逆时针是true
+        // 在中心位置画一个半径150px的圆弧右下角
+
+        var w = ctx.canvas.width;
+        var h = ctx.canvas.height;
+        // 把起点放在圆心位置
+
+        // 分成几等分
+        var num = 60;
+
+        // 一份弧度多少
+        var angle = Math.PI * 2 / num;
+        var x0 = w / 2;
+        var y0 = h / 2;
+
+        // 获取随机颜色
+        var getColor = function() {
+            var r = Math.floor(Math.random() * 256)
+            var g = Math.floor(Math.random() * 256)
+            var b = Math.floor(Math.random() * 256)
+            return 'rgb(' + r + ',' + g + ',' + b + ')'
+        }
+
+        // 上一次绘制的结束弧度等于当前次的起始弧度
+        var startAngle = 0
+        for (var i = 0; i < num; i++) {
+            var startAngle = i * angle;
+            var endAngle = (i + 1) * angle;
+            ctx.beginPath();
+            ctx.moveTo(x0, y0);
+            ctx.arc(x0, y0, 150, startAngle, endAngle);
+            ctx.fillStyle = getColor()
+            ctx.fill()
+        }
+
+
+        // ctx.fill()
+    </script>
+</body>
+
+</html>
