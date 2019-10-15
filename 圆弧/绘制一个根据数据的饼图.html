@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        //1. 根据37期的年龄分布绘制饼图
+        // 2.准备数据
+        // 15-20岁 5个
+        // 20-25岁 30个
+        // 25-30岁 10个
+        // 30-35岁 5个
+
+        var getColor = function() {
+            var r = Math.floor(Math.random() * 256)
+            var g = Math.floor(Math.random() * 256)
+            var b = Math.floor(Math.random() * 256)
+            return 'rgb(' + r + ',' + g + ',' + b + ')'
+        }
+
+        var data = [5, 30, 10, 5]
+        var w = ctx.canvas.width
+        var h = ctx.canvas.height
+        var x0 = w / 2
+        var y0 = h / 2
+
+        // 3.在饼图里面展示出来
+        //4. 需要把数据转化出弧度
+        var angleList = [];
+        var total = 0
+        data.forEach(function(item, i) {
+            total += item
+        })
+
+        // 把数据转换成弧度
+        data.forEach(function(item, i) {
+            var angle = Math.PI * 2 * (item / total)
+            angleList.push(angle)
+        })
+        console.log(angleList)
+
+
+        // 根据弧度绘制扇形
+        var startAngle = 0;
+        angleList.forEach(function(item, i) {
+            // 上一次绘制的结束弧度等于当前次的起始弧度
+            var endAngle = startAngle + item;
+            ctx.beginPath()
+            ctx.moveTo(x0, y0)
+            ctx.arc(x0, y0, 150, startAngle, endAngle)
+            ctx.fillStyle = getColor()
+            ctx.fill()
+                // 记录当前的结束位置作为下一个的起始位置
+            startAngle = endAngle
+        })
+    </script>
+</body>
+
+</html>
