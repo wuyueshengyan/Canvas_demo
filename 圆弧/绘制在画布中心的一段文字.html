@@ -40,15 +40,18 @@
         ctx.lineTo(w / 2, h);
         ctx.stroke();
 
-        // 5.绘制文本  //绘制文本的时候起点在左下角 dudu 
-        // 有文本的属性可以设置 字体 尺寸 左右对齐的方式 垂直对齐的方式 nihao
+        // 5.绘制文本  //绘制文本的时候起点在左下角
+        // 有文本的属性可以设置 字体 尺寸 左右对齐的方式 垂直对齐的方式 
         ctx.beginPath();
         ctx.strokeStyle = "#000";
         ctx.font = '30px Microsoft YaHei'
 
         // 左右对齐方式（center left right start end）  基准起始坐标
         ctx.textAlign = 'center'
-            // ctx.strokeText(str, w / 2, h / 2);
+
+        // ctx.direction = 'rtl';
+
+        // ctx.strokeText(str, w / 2, h / 2);
         ctx.fillText(str, w / 2, h / 2);
     </script>
 </body>
