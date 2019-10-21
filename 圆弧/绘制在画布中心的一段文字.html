@@ -29,7 +29,10 @@
         // 3.确定画布中心
         var w = ctx.canvas.width;
         var h = ctx.canvas.height;
-        // 4.画一个十字架在画布中心
+
+        x0 = w / 2
+        y0 = h / 2
+            // 4.画一个十字架在画布中心
         ctx.strokeStyle = "#eee"
         ctx.beginPath();
         ctx.moveTo(0, h / 2);
@@ -50,12 +53,20 @@
         ctx.textAlign = 'center'
 
         // ctx.direction = 'rtl';
-        // ctx.textBaseline 垂直对齐方式  设置基线
-        // top 文本的基线处于文字的正上方，并且有一段距离
-
+        // ctx.textBaseline 垂直对齐方式  设置基线（middle top bottom） 都是基于起始坐标
+        ctx.textBaseline = 'middle'
 
         // ctx.strokeText(str, w / 2, h / 2);
         ctx.fillText(str, w / 2, h / 2);
+
+        // 画一条下划线
+        ctx.beginPath()
+        var width = ctx.measureText(str).width
+        ctx.moveTo(x0 - width / 2, y0 + 15)
+        ctx.lineTo(x0 + width / 2, y0 + 15)
+        ctx.strokeStyle = "#000"
+        ctx.stroke()
+        console.log(width)
     </script>
 </body>
 
