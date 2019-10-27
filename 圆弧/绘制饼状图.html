@@ -57,8 +57,11 @@
                 ctx.beginPath();
                 ctx.moveTo(that.x0, that.y0);
                 ctx.arc(that.x0, that.y0, that.radius, startAngle, endAngle);
-                ctx.fillStyle = that.getRnadomColor()
+                var color = ctx.fillStyle = that.getRnadomColor()
                 ctx.fill()
+
+                // 绘制标题
+                that.drawTitle(startAngle, item.angle, color)
                 startAngle = endAngle
             })
         }
@@ -70,14 +73,37 @@
             return 'rgb(' + r + ',' + g + ',' + b + ')'
         }
 
-        PieChart.prototype.drawTitle = function() {
+        PieChart.prototype.drawTitle = function(startAngle, angle, color) {
             // 1.确定绘制伸出去的线 通过圆心和伸出去的点确定这条线
             // 2.伸出去的点 需要确定伸出去的线的长度
             // 3.伸出去的线的长度
             // 4.计算这个点的坐标
             // 5.需要根据角度和斜边的长度
-            // 5.1  使用弧度 
+            // 5.1  使用弧度  当前扇形的起始弧度 + 对应弧度的一般
             // 5.2 半径 + 伸出去的长度
+            // 5.3 ooutX = x0 + cos(angle) * (r + outline)
+            // 5.4 ooutY = y0 + sin(angle) * (r + outline)
+            // 斜边长
+            var edge = this.radius + this.outline
+                // x轴方向的直角边
+            var edgeX = Math.cos(startAngle + angle / 2) * edge
+                // y轴方向的直角边
+            var edgeY = Math.sin(startAngle + angle / 2) * edge
+                // 计算出去的点坐标
+            var outX = this.x0 + edgeX
+            var outY = this.y0 + edgeY
+                // 画线
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.x0, this.y0)
+            this.ctx.lineTo(outX, outY)
+            this.ctx.strokeStyle = color
+            this.ctx.stroke()
+
+            // 画文字和下划线
+            // 判断线的方向  通过伸出去的点在x0的左边 线的方向就是在左边   伸出去的点在x0的右边 线的方向就是在右边  
+
+
+
 
         }
 
