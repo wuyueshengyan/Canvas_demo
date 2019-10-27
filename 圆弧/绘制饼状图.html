@@ -37,6 +37,12 @@
 
             // 3.伸出去的线的长度
             this.outline = 20;
+
+            // 说明矩形的大小
+            this.rectW = 30
+            this.rectH = 10
+            this.space = 10
+
         }
 
         PieChart.prototype.init = function(data) {
@@ -61,7 +67,9 @@
                 ctx.fill()
 
                 // 绘制标题
-                that.drawTitle(startAngle, item.angle, color)
+                that.drawTitle(startAngle, item.angle, color, item.title)
+                    // 绘制说明
+                that.drawDesc(i, item.title)
                 startAngle = endAngle
             })
         }
@@ -73,42 +81,63 @@
             return 'rgb(' + r + ',' + g + ',' + b + ')'
         }
 
-        PieChart.prototype.drawTitle = function(startAngle, angle, color) {
-            // 1.确定绘制伸出去的线 通过圆心和伸出去的点确定这条线
-            // 2.伸出去的点 需要确定伸出去的线的长度
-            // 3.伸出去的线的长度
-            // 4.计算这个点的坐标
-            // 5.需要根据角度和斜边的长度
-            // 5.1  使用弧度  当前扇形的起始弧度 + 对应弧度的一般
-            // 5.2 半径 + 伸出去的长度
-            // 5.3 ooutX = x0 + cos(angle) * (r + outline)
-            // 5.4 ooutY = y0 + sin(angle) * (r + outline)
-            // 斜边长
-            var edge = this.radius + this.outline
-                // x轴方向的直角边
-            var edgeX = Math.cos(startAngle + angle / 2) * edge
-                // y轴方向的直角边
-            var edgeY = Math.sin(startAngle + angle / 2) * edge
-                // 计算出去的点坐标
-            var outX = this.x0 + edgeX
-            var outY = this.y0 + edgeY
-                // 画线
-            this.ctx.beginPath();
-            this.ctx.moveTo(this.x0, this.y0)
-            this.ctx.lineTo(outX, outY)
-            this.ctx.strokeStyle = color
-            this.ctx.stroke()
+        PieChart.prototype.drawTitle = function(startAngle, angle, color, title) {
+                // 1.确定绘制伸出去的线 通过圆心和伸出去的点确定这条线
+                // 2.伸出去的点 需要确定伸出去的线的长度
+                // 3.伸出去的线的长度
+                // 4.计算这个点的坐标
+                // 5.需要根据角度和斜边的长度
+                // 5.1  使用弧度  当前扇形的起始弧度 + 对应弧度的一般
+                // 5.2 半径 + 伸出去的长度
+                // 5.3 ooutX = x0 + cos(angle) * (r + outline)
+                // 5.4 ooutY = y0 + sin(angle) * (r + outline)
+                // 斜边长
+                var edge = this.radius + this.outline
+                    // x轴方向的直角边
+                var edgeX = Math.cos(startAngle + angle / 2) * edge
+                    // y轴方向的直角边
+                var edgeY = Math.sin(startAngle + angle / 2) * edge
+                    // 计算出去的点坐标
+                var outX = this.x0 + edgeX
+                var outY = this.y0 + edgeY
+                    // 画线
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.x0, this.y0)
+                this.ctx.lineTo(outX, outY)
+                this.ctx.strokeStyle = color
 
-            // 画文字和下划线
-            // 判断线的方向  通过伸出去的点在x0的左边 线的方向就是在左边   伸出去的点在x0的右边 线的方向就是在右边  
+                // 画文字和下划线
+                // 判断线的方向  通过伸出去的点在x0的左边 线的方向就是在左边   伸出去的点在x0的右边 线的方向就是在右边
+                // 测量title
+                this.ctx.font = '12px Microsoft YaHei'
+                    // 测量必须在设置字体之前，要不然会导致测量不正确
+                var textWidth = this.ctx.measureText(title).width
+                if (outX > this.x0) {
+                    // 右
+                    this.ctx.lineTo(outX + textWidth, outY)
+                    this.ctx.textAlign = 'left'
+                } else {
+                    // 左
+                    this.ctx.lineTo(outX - textWidth, outY)
+                    this.ctx.textAlign = 'right'
+                }
+                this.ctx.stroke()
+                this.ctx.textBaseline = 'bottom'
+                this.ctx.fillText(title, outX, outY)
 
-
-
-
-        }
-
-        PieChart.prototype.drawDesc = function() {
-
+            }
+            // 绘制说明
+        PieChart.prototype.drawDesc = function(index, title) {
+            // 需要矩形的大小
+            // 距离上和左边的间距
+            // 矩形之间的之间的间距
+            this.ctx.fillRect(this.space, this.space + index * (this.rectH + this.space), this.rectW, this.rectH);
+            // 绘制文字
+            this.ctx.beginPath()
+            this.ctx.textAlign = 'left'
+            this.ctx.textBaseline = 'top'
+            this.ctx.font = '14px Microsoft YaHei'
+            this.ctx.fillText(title, this.space + this.rectW + 10, this.space + index * (this.rectH + this.space))
         }
 
         PieChart.prototype.tsansformAngle = function(data) {
