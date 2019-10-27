@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <img src="./image/00.jpeg" alt=""> -->
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        // 绘制图片的三种方式
+        // 1.加载图片到内存即可
+
+        // 创建对象
+        var img = new Image();
+        // var img = document.createElement('img')
+        // 必须等图片加载完毕
+        // 绑定加载完成事件
+        img.onload = function() {
+            console.log(img)
+                // 一定可以加载完毕
+        };
+        // 设置图片路径
+        img.src = "image/00.jpeg"
+    </script>
+</body>
+
+</html>
