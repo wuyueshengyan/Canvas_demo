@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <img src="./image/00.jpeg" alt=""> -->
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        // 创建对象
+        var img = new Image();
+        // 必须等图片加载完毕
+        // 绑定加载完成事件
+        img.onload = function() {
+            console.log(img);
+            // 一定可以加载完毕
+            // 动态获取当前图片的尺寸，计算每个人物的尺寸
+            var imgWidth = img.width
+            var imgHeight = img.height
+            var personW = imgWidth / 8
+            var personH = imgHeight
+                // 位截取图片
+                // 帧动画  在固定的时间间隔更换显示的图片  就根据图片的索引
+            var index = 0
+
+            // 绘制在画布的中心
+            var x0 = ctx.canvas.width / 2 - personW / 2
+            var y0 = ctx.canvas.height / 2 - personH / 2
+
+            // 绘制图片
+            ctx.drawImage(img, 0, 0, personW, personH, x0, y0, personW, personH)
+
+            setInterval(function() {
+
+                index++
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+                ctx.drawImage(img, index * personW, 0, personW, personH, x0, y0, personW, personH)
+                if (index >= 7) {
+                    index = 0
+                }
+            }, 100)
+
+
+        };
+        // 设置图片路径
+        img.src = "image/03.jpg"
+    </script>
+</body>
+
+</html>

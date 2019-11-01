@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <img src="./image/00.jpeg" alt=""> -->
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+
+        // 设置图片路径
+        img.src = "image/01.jpg"
+
+
+        var Person = function() {
+
+        }
+
+        Person.prototype.init = function() {
+            // 1.加载图片
+            // 2.默认绘制在中心位置正面朝外
+            // 3.能够通过方向键去控制人物的行走
+
+        }
+
+        Person.prototype.loadImg = function() {
+            // 创建对象
+            var img = new Image();
+            // 提前绑定事件
+            img.onload = function() {
+                console.log(img);
+
+
+            };
+        }
+    </script>
+</body>
+
+</html>
