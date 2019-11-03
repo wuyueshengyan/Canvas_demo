@@ -22,34 +22,83 @@
         var myCanvas = document.querySelector('canvas');
         var ctx = myCanvas.getContext('2d')
 
+        var Person = function(ctx) {
+            // 绘制工具
+            this.ctx = ctx || document.querySelector('canvas').getContext('2d');
+            // 图片路径
+            this.src = 'image/05.png';
+            // 画布的大小
+            this.canvasW = this.ctx.canvas.width;
+            this.canvasH = this.ctx.canvas.height;
+            // console.log(this.canvasW, this.canvasH)
 
-        // 设置图片路径
-        img.src = "image/01.jpg"
+            // 行走的参数
+            this.stepSize = 10;
+            // 行走方向 默认的行走方向向前   向前的方向为0 左走位1 右走为2 后走为3 和图片的行数一一对应
+            this.direction = 0;
 
 
-        var Person = function() {
-
-
-        }
+            // 初始化方法
+            this.init()
+        };
 
         Person.prototype.init = function() {
+            var that = this;
             // 1.加载图片
-            // 2.默认绘制在中心位置正面朝外
-            // 3.能够通过方向键去控制人物的行走
+            this.loadImg(function(img) {
+                // 图片的大小
+                that.imgW = img.width;
+                that.imgH = img.height;
 
+                // 人物的大小
+                that.personW = that.imgW / 4;
+                that.personH = that.imgH / 4;
+
+                // 绘制图片的起点
+                that.x0 = that.canvasW / 2 - that.personW / 2;
+                that.y0 = that.canvasH / 2 - that.personH / 2;
+
+                // 2.默认绘制在中心位置正面朝外
+                that.ctx.drawImage(img, 0, 0, that.personW, that.personH, that.x0, that.y0, that.personW, that.personH, );
+
+                // 3.能够通过方向键去控制人物的行走
+                document.onkeydown = function(e) {
+                    if (e.keyCode == 38) {
+                        // 前
+                    } else if (e.keyCode == 37) {
+                        // 左
+                    } else if (e.keyCode == 39) {
+                        // 右
+                    } else if (e.keyCode == 37) {
+                        // 后
+                    }
+                }
+
+            });
+        };
+        // 绘制图片
+        Person.prototype.drawImage = function(img) {
+            // 清除画布
+            this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
+
+            // 绘图
+            // 在精灵图上的定位 x 索引 / y 方向
+            this.ctx.drawImage(img, 0, 0, this.personW, this.personH, this.x0, this.y0, this.personW, this.personH)
         }
 
-        Person.prototype.loadImg = function() {
+        // 加载图片
+        Person.prototype.loadImg = function(callback) {
             // 创建对象
             var img = new Image();
             // 提前绑定事件
             img.onload = function() {
                 console.log(img);
-
-
+                callback && callback(img);
             };
-            img.src = "image/01.jpg"
-        }
+            img.src = this.src
+        };
+
+        new Person();
     </script>
 </body>
 
