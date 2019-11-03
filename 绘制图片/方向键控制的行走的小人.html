@@ -36,7 +36,10 @@
             this.stepSize = 10;
             // 行走方向 默认的行走方向向前   向前的方向为0 左走位1 右走为2 后走为3 和图片的行数一一对应
             this.direction = 0;
-
+            // x轴方向的偏移步数
+            this.stepX = 0
+                // y轴方向的偏移步数
+            this.stepY = 0
 
             // 初始化方法
             this.init()
@@ -59,18 +62,32 @@
                 that.y0 = that.canvasH / 2 - that.personH / 2;
 
                 // 2.默认绘制在中心位置正面朝外
-                that.ctx.drawImage(img, 0, 0, that.personW, that.personH, that.x0, that.y0, that.personW, that.personH, );
+                that.ctx.drawImage(img, 0, 0, that.personW, that.personH, that.x0, that.y0, that.personW, that.personH);
 
                 // 3.能够通过方向键去控制人物的行走
+                that.index = 0;
                 document.onkeydown = function(e) {
                     if (e.keyCode == 38) {
-                        // 前
+                        console.log('上')
+                            // 前
+                        that.direction = 3
+                        that.drawImage(img)
+                        that.stepY--
                     } else if (e.keyCode == 37) {
-                        // 左
+                        that.direction = 1
+                        that.drawImage(img)
+                        that.stepX--
+                            // 左
                     } else if (e.keyCode == 39) {
-                        // 右
-                    } else if (e.keyCode == 37) {
-                        // 后
+                        that.direction = 2
+                        that.drawImage(img)
+                        that.stepX++
+                            // 右
+                    } else if (e.keyCode == 40) {
+                        that.direction = 0
+                        that.drawImage(img)
+                        that.stepY++
+                            // 后
                     }
                 }
 
@@ -78,12 +95,18 @@
         };
         // 绘制图片
         Person.prototype.drawImage = function(img) {
+            this.index++;
             // 清除画布
             this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
-
-            // 绘图
-            // 在精灵图上的定位 x 索引 / y 方向
-            this.ctx.drawImage(img, 0, 0, this.personW, this.personH, this.x0, this.y0, this.personW, this.personH)
+            console.log('画图')
+            console.log(img)
+                // 绘图
+                // 在精灵图上的定位 x 索引 / y 方向
+            this.ctx.drawImage(img, this.index * this.personW, this.direction * this.personH, this.personW, this.personH, this.x0 + this.stepX * this.stepSize, this.y0 + this.stepY * this.stepSize, this.personW, this.personH)
+                // 如果索引超出了 变成0
+            if (this.index >= 3) {
+                this.index = 0
+            }
         }
 
         // 加载图片
