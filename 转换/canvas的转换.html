@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.准备画布 -->
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var myCanvas = document.querySelector('canvas');
+        var ctx = myCanvas.getContext('2d')
+
+        ctx.strokeRect(100, 100, 200, 200)
+
+        ctx.translate(100, 100) //移动的是坐标
+        ctx.scale(0.5, 1) //缩放 x轴缩放 y轴缩放 缩放的也是坐标轴
+        ctx.rotate(Math.PI / 6); //旋转 参数代表旋转角度  跟坐标相关
+
+
+
+        ctx.strokeRect(100, 100, 100, 100)
+    </script>
+</body>
+
+</html>
